@@ -1,4 +1,4 @@
-# Assignment
+# RateLimiter 
 A simple SpirngBoot Application with some CRUD operation and with implementation of simple Rate Limiter.
 In this application Bucket4j-core is used as a RateLimiter and spring-data-jpa to integrate spring application with JPA.
 Bucket4j-core is a java rate limiting library based on token-bucket algorithm.  
