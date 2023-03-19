@@ -1,13 +1,12 @@
 package com.RateLimiterAssignment.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity(name = "users")
+@Entity(name = "USERS")
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,13 +26,6 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, length = 120)
     private String email;
 
-    @Column(nullable = false)
-    private String encryptedPassword;
-
-    private String emailVerificationToken;
-
-    @Column(nullable = false)
-    private Boolean emailVerificationStatus = false;
 
     public long getId() {
         return id;
@@ -75,27 +67,5 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
 
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
-
-    public String getEmailVerificationToken() {
-        return emailVerificationToken;
-    }
-
-    public void setEmailVerificationToken(String emailVerificationToken) {
-        this.emailVerificationToken = emailVerificationToken;
-    }
-
-    public Boolean getEmailVerificationStatus() {
-        return emailVerificationStatus;
-    }
-
-    public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
-        this.emailVerificationStatus = emailVerificationStatus;
-    }
 }

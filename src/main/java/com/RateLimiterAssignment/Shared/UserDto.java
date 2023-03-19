@@ -1,4 +1,4 @@
-package com.RateLimiterAssignment.shared;
+package com.RateLimiterAssignment.Shared;
 
 import java.io.Serializable;
 

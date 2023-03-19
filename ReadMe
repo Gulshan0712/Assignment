@@ -1,0 +1,75 @@
+# RateLimiter
+A simple SpirngBoot Application with some CRUD operation and with implementation of simple Rate Limiter.
+In this application Bucket4j-core is used as a RateLimiter and spring-data-jpa to integrate spring application with JPA.
+Bucket4j-core is a java rate limiting library based on token-bucket algorithm.
+
+To run this application we have to add some dependencies in pom.xml
+_____________________________________________________________________________________________________________________________________
+Bucket4j-core
+
+        <dependency>
+			<groupId>com.github.vladimir-bukhtoyarov</groupId>
+			<artifactId>bucket4j-core</artifactId>
+			<version>4.10.0</version>
+		</dependency>
+
+_____________________________________________________________________________________________
+spring-starter-web
+
+ <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+_____________________________________________________________________________________________________________
+spring-boot-starter-data-jpa
+
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+_____________________________________________________________________________________________________________
+
+Token Bucket is an algorithm that you can use to implement rate limiting. In short, it works as follows:
+
+1. A bucket is created with a certain capacity (number of tokens).
+2. When a request comes in, the bucket is checked. If there is enough capacity, the request is allowed to proceed.
+  Otherwise, the request is denied.
+3. When a request is allowed, the capacity is reduced.
+4. After a certain amount of time, the capacity is replenished
+ Postman is used to test the code.
+There are 4 APIs:
+1. First we have to run "generate-Token",
+    This api will create two buckets. First bucket  with 3 tokens per 15 seconds i.e each user can request only 3 times in 15 seconds and
+     in 4th request it will be denied but after 15 seconds the bucket will be replenished.
+     Second bucket with 3 token per 10 seconds.
+  Curl command::--
+
+  curl --location --request GET 'http://localhost:8080/users/token-generate'
+
+2. createUser
+   This api has bucket with 3 tokens per 15 seconds. It will create a user
+
+Curl command::--
+
+curl --location --request GET 'http://localhost:8080/users/demo' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=E20FC70A652081DF62560D62D25CDF54' \
+--data-raw '{
+    "firstName" : "Gulshan",
+    "lastName" : "Kumar",
+    "email": "123785@gmail.com",
+    "password" : "gulshan"
+}'
+
+3. getUser
+    This api has bucket with 3 tokens per 10 seconds. This api will get user details whose email is passed.
+    curl command::--
+
+    curl --location --request GET 'http://localhost:8080/users/123785@gmail.com'
+
+4. Delete USer
+    Api to delete the User
+    curl command:
+
+    curl --location --request DELETE 'http://localhost:8080/users/123785@gmail.com'
+
